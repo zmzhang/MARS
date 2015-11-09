@@ -70,7 +70,7 @@ for i=1:ns
     
     SEGMENTS(:,:,i)=segments;
     TZ(:,:,i)=tz;
-    disp([num2str(i),'/',num2str(ns),'th of findTZ ']);
+    %disp([num2str(i),'/',num2str(ns),'th of findTZ ']);
 end
 end
 
@@ -107,7 +107,7 @@ for i=1:ns
     end
     NEE(:,i)=needles;
     PCS(:,i)=pcs;
-    disp([num2str(i),'/',num2str(ns),'th of initial_estimatTZ ']);
+    %disp([num2str(i),'/',num2str(ns),'th of initial_estimatTZ ']);
 end
 end
 
@@ -169,7 +169,7 @@ for i=1:ns
         HEIGS(:,i)=heigs;
         
         %close all
-        disp([num2str(i),'/',num2str(ns),'th of resolution']);
+        %disp([num2str(i),'/',num2str(ns),'th of resolution']);
     end
     
 end

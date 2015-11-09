@@ -29,11 +29,16 @@ for i=1:length(full_name)
 end
 eval(['save ' [project_names 'sam_names']  ' sam_names']); % save all files' names
 
+str = ['Loading datafiles in progress, please wait'];
+h=waitbar(0,str);
+
 for i=1:length(full_name)
     [~,name,ext] = fileparts(full_name{i});
-    [X0,T,W]=cdftomat(full_name{i},1);   % tranfer cdf to mat
-    eval(['save ' [project_names name] ' X0 T W']);    % svae data
-    disp([num2str(i),'/',num2str(length(full_name)),'th of reading data']);
+    [X0,T,W]=cdftomat(full_name{i},1);   % transfer cdf to mat
+    eval(['save ' [project_names name] ' X0 T W']);    % save data
+    %disp([num2str(i),'/',num2str(length(full_name)),'th of reading datafiles']);
+    waitbar(i/length(full_name),h);
+    set(h,'Name',[num2str(fixfloat(100*i/length(full_name),2)),'% data reading finished (files:', num2str(i),')']);
 end
 
 % % %%%%%+++++.....................................DECONVOLUTION.........................++++%%%%% %
@@ -41,13 +46,14 @@ load(MSRT_names)
 load([project_names 'sam_names'])
 sams=size(sam_names,1);
 decon_names=cell(sams,1);
+
 for i=1:sams
     name=sam_names(i);
-    load(name{1})
+    load([project_names name{1}])
     result = mars(X0,S,R,w,threshold,mpw);
     eval(['save ' [project_names 'd' name{1}] ' X0 T W S R result']);
     decon_names(i,1)={[project_names 'd' name{1}]};
-    disp([num2str(i),'/',num2str(length(sams)),'th of resolution']);
+    disp([num2str(i),'/',num2str(sams),'th of all files resolution finished']); 
 end
 eval(['save ' [project_names 'dnames'] ' decon_names']);  % save resolution results
 
@@ -55,7 +61,7 @@ eval(['save ' [project_names 'dnames'] ' decon_names']);  % save resolution resu
 
 % %%%%%+++++.....................................geting QUAL/QUAN tables.........................++++%%%%% %
 load([project_names 'dnames']);
-load('sam_names')
+load([project_names 'sam_names'])
 % QUAN table
 A=[];
 H=[];
