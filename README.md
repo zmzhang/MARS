@@ -10,7 +10,7 @@ A MATLAB toolbox, called MS-Assisted Resolution of Signal (**MARS**), is propose
 
 1. Clone this project with git
 2. Start MATLAB and change the working dir to the folder of project datafiles
-3. Obtain MSRTs with [MCR-ALS](https://mcrals.wordpress.com/download)
+3. Obtain MSRTs with HELP or [MCR-ALS](https://mcrals.wordpress.com/download)
 4. Run start.m code in MATLAB command window
 
 ### Contact ###
